@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var AdbClient = require('adb-client'),
+    Rangers = require('../lib/rangers');
+
+adb = new AdbClient();
+rangers = new Rangers(adb);
+
+setInterval(function() {
+  var items = ['thirdRander', 'missile', 'levelUpMineral', 'stopClearBonus', 'center', 'cancel', 'okLevelUp'],
+      randomIndex = Math.floor(Math.random() * items.length);
+  rangers.tap(items[randomIndex]);
+}, 1000);

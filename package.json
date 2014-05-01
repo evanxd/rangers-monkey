@@ -1,0 +1,31 @@
+{
+  "name": "rangers-monkey",
+  "version": "0.0.0",
+  "description": "An automation tool to play LINE Rangers.",
+  "author": {
+    "name": "evanxd",
+    "email": "itoyxd@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evanxd/rangers-monkey.git"
+  },
+  "keyboard": [
+    "adb",
+    "line",
+    "rangers"
+  ],
+  "license": "MIT",
+  "bin": {
+    "rangers-monkey": "./bin/rangers-monkey"
+  },
+  "dependencies": {
+    "adb-client": "0.0.3"
+  },
+  "devDependencies": {
+    "jshint": "2.5.0"
+  },
+  "scripts": {
+    "test": "make"
+  }
+}
