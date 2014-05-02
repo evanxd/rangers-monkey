@@ -10,33 +10,47 @@ var adb = new AdbClient(),
     rangers = new Rangers(adb),
     commands = [
       { 
+        probability: 0.05,
+        strategy: function pickStage() {
+          // There is always a stage in the center of screen.
+          rangers.tap('center');
+        }
+      },
+      { 
+        probability: 0.05,
+        strategy: function startGame() {
+          rangers.tap('start');
+          rangers.tap('cancelGoToShop');
+        }
+      },
+      { 
         probability: 0.3,
-        strategy: function() { 
-          rangers.tap('firstRander');
+        strategy: function sendFirstRanger() {
+          rangers.tap('firstRanger');
         }
       },
       { 
-        probability: 0.25,
-        strategy: function() { 
-          rangers.tap('secondRander');
+        probability: 0.2,
+        strategy: function sendSecondRanger() {
+          rangers.tap('secondRanger');
         }
       },
       { 
-        probability: 0.25,
-        strategy: function() { 
-          rangers.tap('thirdRander');
+        probability: 0.2,
+        strategy: function sendThirdRanger() {
+          rangers.tap('thirdRanger');
         }
       },
       { 
         probability: 0.1,
-        strategy: function() { 
+        strategy: function fireMissile() {
           rangers.tap('missile');
         }
       },
       { 
         probability: 0.1,
-        strategy: function() { 
-          rangers.tap('levelUpMineral');
+        strategy: function levelUpMineral() {
+          rangers.tap('mineral');
         }
       }
     ],
