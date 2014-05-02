@@ -1,13 +1,45 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var AdbClient = require('adb-client'),
-    Rangers = require('../lib/rangers');
+    Rangers = require('../lib/rangers'),
+    Monkey = require('../lib/monkey');
 
-adb = new AdbClient();
-rangers = new Rangers(adb);
+var adb = new AdbClient(),
+    rangers = new Rangers(adb),
+    commands = [
+      { 
+        probability: 0.3,
+        strategy: function() { 
+          rangers.tap('firstRander');
+        }
+      },
+      { 
+        probability: 0.25,
+        strategy: function() { 
+          rangers.tap('secondRander');
+        }
+      },
+      { 
+        probability: 0.25,
+        strategy: function() { 
+          rangers.tap('thirdRander');
+        }
+      },
+      { 
+        probability: 0.1,
+        strategy: function() { 
+          rangers.tap('missile');
+        }
+      },
+      { 
+        probability: 0.1,
+        strategy: function() { 
+          rangers.tap('levelUpMineral');
+        }
+      }
+    ],
+    monkey = new Monkey(commands, { interval: 300 });
 
-setInterval(function() {
-  var items = ['thirdRander', 'missile', 'levelUpMineral', 'stopClearBonus', 'center', 'cancel', 'okLevelUp'],
-      randomIndex = Math.floor(Math.random() * items.length);
-  rangers.tap(items[randomIndex]);
-}, 1000);
+monkey.perform();
